@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#BFE6FF">
+<title>KIKO Learn World – Belajar Seru Tanpa Dipaksa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#BFE6FF; --blue2:#8FD0FA; --cream:#FFF6E5; --pink:#FFD6E0; --yellow:#FFF1B8;
+  --green:#CDF5DB; --purple:#E3DAFF; --orange:#FFDDBA; --ink:#3B3A5A; --soft:#7a7a9a;
+  --shadow:0 6px 18px rgba(90,120,170,.18); --r:26px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:#d9eefc;font-family:'Baloo 2','Fredoka',system-ui,sans-serif;color:var(--ink);font-size:18px}
+button{font-family:inherit;color:inherit;cursor:pointer;border:0}
+#app{max-width:480px;margin:0 auto;min-height:100dvh;background:var(--cream);position:relative;padding-bottom:92px;box-shadow:0 0 40px rgba(80,120,170,.25)}
+
+/* top bar */
+#topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(191,230,255,.95);backdrop-filter:blur(6px);border-radius:0 0 24px 24px;box-shadow:0 4px 14px rgba(90,120,170,.15)}
+#topbar .ic{width:44px;height:44px;border-radius:50%;background:#fff;font-size:22px;box-shadow:var(--shadow);flex:none;transition:transform .15s}
+#topbar .ic:active{transform:scale(.88)}
+#title{flex:1;font-weight:800;font-size:21px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#starpill{background:var(--yellow);padding:6px 12px;border-radius:999px;font-weight:800;box-shadow:var(--shadow);flex:none}
+#view{padding:14px}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:18px 10px 10px;border-radius:32px;background:linear-gradient(180deg,#bfe6ff 0%,#e6f6ff 70%,#fff6e5 100%);overflow:hidden;box-shadow:var(--shadow)}
+.sun{position:absolute;top:12px;right:16px;font-size:46px;animation:spin 18s linear infinite}
+.cloud{position:absolute;font-size:44px;opacity:.9;animation:drift 9s ease-in-out infinite alternate}
+.cloud.c1{top:16px;left:8px}.cloud.c2{top:70px;right:6px;font-size:34px;animation-delay:-3s}
+@keyframes drift{to{transform:translateX(22px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mascot{width:150px;height:auto;animation:bob 2.4s ease-in-out infinite;cursor:pointer;position:relative;z-index:2}
+@keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
+.logo{width:74px;height:74px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:var(--shadow)}
+.hero h1{margin:4px 0 0;font-size:34px;line-height:1;font-weight:800;color:#2e6fb0;text-shadow:2px 2px 0 #fff}
+.hero p{margin:6px 0 8px;font-size:19px;color:var(--ink);font-weight:700}
+.teacher{display:inline-block;background:#fff;padding:5px 14px;border-radius:999px;font-weight:700;font-size:16px;box-shadow:var(--shadow)}
+.speech{position:absolute;left:12px;top:92px;background:#fff;padding:6px 12px;border-radius:18px;font-size:15px;font-weight:700;box-shadow:var(--shadow);z-index:3;animation:pop .5s}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+
+/* menu cards */
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.mcard{border-radius:var(--r);padding:16px 8px 14px;text-align:center;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;font-weight:800;font-size:21px;position:relative;overflow:hidden}
+.mcard .em{font-size:60px;display:block;line-height:1.1;transition:transform .25s}
+.mcard small{display:block;font-weight:600;font-size:14px;color:var(--soft)}
+.mcard:hover{transform:translateY(-4px) rotate(-1deg)}
+.mcard:hover .em{transform:scale(1.18) rotate(8deg)}
+.mcard:active{transform:scale(.94)}
+.bg-pink{background:var(--pink)}.bg-blue{background:var(--blue)}.bg-green{background:var(--green)}.bg-yellow{background:var(--yellow)}.bg-purple{background:var(--purple)}.bg-orange{background:var(--orange)}
+
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;width:100%;padding:14px;border-radius:22px;background:#c8f3d2;font-weight:800;font-size:18px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.ws{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;width:100%;padding:14px;border-radius:22px;background:var(--yellow);font-weight:800;font-size:18px;box-shadow:var(--shadow);transition:transform .15s}
+.ws:hover{transform:translateY(-3px)}.ws:active{transform:scale(.96)}
+
+/* tabs */
+.tabs{display:flex;gap:8px;margin-bottom:14px;background:#fff;padding:6px;border-radius:22px;box-shadow:var(--shadow)}
+.tabs button{flex:1;padding:10px 4px;border-radius:16px;background:transparent;font-weight:800;font-size:16px;transition:.2s}
+.tabs button.on{background:var(--blue);box-shadow:0 3px 8px rgba(90,120,170,.25)}
+.hint{text-align:center;color:var(--soft);font-weight:600;margin:0 0 12px;font-size:16px}
+
+/* grids */
+.grid{display:grid;gap:10px}
+.g5{grid-template-columns:repeat(5,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:1fr 1fr}
+.tile{aspect-ratio:1;border-radius:20px;font-size:30px;font-weight:800;box-shadow:var(--shadow);transition:transform .15s;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.tile:hover{transform:scale(1.1) rotate(-3deg)}.tile:active{transform:scale(.9)}
+.tile.done{outline:3px solid #7ad89a}
+.tile .ar{font-family:'Noto Naskh Arabic',serif;font-size:36px;line-height:1.2}
+.tile small{font-size:11px;font-weight:700;color:var(--soft);margin-top:-2px}
+.nt{font-size:34px}
+
+/* cards */
+.card{background:#fff;border-radius:var(--r);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.card h3{margin:0 0 8px;font-size:20px}
+.doa{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:12px 14px;margin-bottom:12px;border-radius:24px;box-shadow:var(--shadow);font-weight:800;font-size:19px;transition:.15s}
+.doa:active{transform:scale(.96)}.doa:hover{transform:translateX(4px)}
+.doa .em{font-size:44px}.doa small{display:block;font-weight:600;color:var(--soft);font-size:14px}
+
+/* modal */
+#modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(60,70,110,.45);padding:18px}
+#modal.show{display:flex}
+.msheet{width:100%;max-width:420px;background:#fff;border-radius:34px;padding:22px 18px 18px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3);position:relative;animation:pop .35s;max-height:92dvh;overflow:auto}
+.mx{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;background:var(--pink);font-size:18px;font-weight:800}
+.mbig{font-size:92px;font-weight:800;line-height:1;color:#e6709a;text-shadow:3px 3px 0 var(--yellow)}
+.mbig small{font-size:56px;color:#5aa8e6;margin-left:10px}
+.mbig.ar{font-family:'Noto Naskh Arabic',serif;color:#3a8f6b;font-size:110px}
+.memo{font-size:100px;line-height:1.2}
+.bounce{animation:bounce 1s ease infinite}
+@keyframes bounce{50%{transform:translateY(-14px) scale(1.08)}}
+.mword{font-size:30px;font-weight:800}
+.bubble{background:var(--blue);display:inline-block;border-radius:20px;padding:8px 16px;margin:10px 0;font-weight:700;font-size:18px}
+.mrow{display:flex;gap:10px;justify-content:center;margin-top:8px}
+.mrow button,.btn{padding:12px 18px;border-radius:20px;font-weight:800;font-size:17px;background:var(--green);box-shadow:var(--shadow);transition:.15s}
+.mrow button:active,.btn:active{transform:scale(.94)}
+.btn.b{background:var(--blue)}.btn.y{background:var(--yellow)}.btn.p{background:var(--pink)}
+.arab{font-family:'Noto Naskh Arabic',serif;font-size:30px;line-height:1.9;direction:rtl;margin:6px 0;font-weight:700}
+.latin{font-size:15px;color:var(--soft);font-weight:600;font-style:italic}
+.dots{display:flex;gap:6px;justify-content:center;margin:8px 0}.dots i{width:10px;height:10px;border-radius:50%;background:#dbe6f2}.dots i.on{background:#e6709a;transform:scale(1.3)}
+.objs{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;font-size:42px;margin:8px 0}
+.objs span{animation:pop .4s backwards}
+
+/* quiz */
+.q-card{background:#fff;border-radius:30px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+.q-prompt{font-size:76px;line-height:1.15;min-height:90px;word-break:break-all}
+.q-prompt.sm{font-size:42px}
+.q-title{font-weight:800;margin:6px 0 12px;font-size:20px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.opt{padding:14px 4px;border-radius:20px;font-size:26px;font-weight:800;box-shadow:var(--shadow);transition:.15s;overflow:hidden}
+.opt.c0{background:var(--pink)}.opt.c1{background:var(--yellow)}.opt.c2{background:var(--green)}
+.opt.sm{font-size:19px}
+.opt:hover{transform:translateY(-3px)}.opt.ok{background:#7ad89a;transform:scale(1.08)}.opt.bad{background:#ffb3b3}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.feedback{min-height:34px;margin-top:12px;font-weight:800;color:#2f9e5b;font-size:19px}
+
+/* drag */
+.targets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.target{background:#fff;border:3px dashed var(--blue2);border-radius:22px;padding:8px 4px;text-align:center;min-height:130px;transition:.2s}
+.target.done{border-style:solid;border-color:#7ad89a;background:var(--green)}
+.target .tv{font-size:15px;font-weight:800;line-height:1.3}
+.target .tv .big{font-size:48px;display:block}
+.target .slot{margin:4px auto 0;width:52px;height:46px;border-radius:14px;background:var(--cream);font-size:28px;font-weight:800;line-height:46px}
+.chips{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;padding:14px;background:var(--blue);border-radius:26px;min-height:84px}
+.chip{width:62px;height:62px;border-radius:18px;background:#fff;box-shadow:var(--shadow);font-size:34px;font-weight:800;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;cursor:grab;position:relative;transition:box-shadow .15s}
+.chip.drag{z-index:40;box-shadow:0 12px 24px rgba(0,0,0,.3);cursor:grabbing}
+.mini{font-size:22px;display:block;line-height:1.1;word-break:break-all}
+
+/* memory & puzzle */
+.mem{grid-template-columns:repeat(4,1fr)}
+.mc{aspect-ratio:1;perspective:600px;background:none;padding:0}
+.mc div{width:100%;height:100%;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:var(--shadow);transition:transform .35s;background:linear-gradient(135deg,#8fd0fa,#c9b8ff);color:#fff;font-weight:800}
+.mc.open div,.mc.match div{background:#fff;transform:rotateY(360deg)}
+.mc.match div{background:var(--green)}
+.pz{grid-template-columns:repeat(5,1fr)}
+.pz .tile{font-size:34px}.pz .sel{outline:4px solid #e6709a;transform:scale(1.1)}
+
+/* rewards / dashboard */
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.badge{border-radius:18px;padding:8px 2px;background:#f0f0f6;font-size:12px;font-weight:700;filter:grayscale(1);opacity:.55}
+.badge.on{filter:none;opacity:1;background:var(--yellow);animation:bounce 2s infinite}
+.badge b{display:block;font-size:34px;font-weight:400}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat div{border-radius:24px;padding:14px;text-align:center;box-shadow:var(--shadow);font-weight:700;font-size:15px}
+.stat b{display:block;font-size:34px;font-weight:800}
+.bar{margin:10px 0}.bar .l{display:flex;justify-content:space-between;font-weight:700;font-size:16px}
+.bar .t{height:16px;background:#eef3fa;border-radius:999px;overflow:hidden;margin-top:3px}
+.bar .f{height:100%;border-radius:999px;transition:width .9s}
+.chart{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:8px}
+.chart div{flex:1;text-align:center;font-size:12px;font-weight:700}
+.chart i{display:block;border-radius:10px 10px 4px 4px;background:linear-gradient(var(--blue2),var(--blue));margin-bottom:3px;transition:height .8s}
+.note{font-size:14px;color:var(--soft);text-align:center;font-weight:600}
+
+/* bottom nav */
+#bottomnav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:calc(100% - 28px);max-width:452px;z-index:25;display:flex;background:#fff;border-radius:28px;padding:6px;box-shadow:0 8px 26px rgba(70,100,150,.28)}
+#bottomnav button{flex:1;background:transparent;border-radius:22px;padding:6px 0;font-weight:800;font-size:13px;display:flex;flex-direction:column;align-items:center;transition:.2s}
+#bottomnav button span{font-size:26px;line-height:1.1;transition:transform .2s}
+#bottomnav button.on{background:var(--blue)}#bottomnav button.on span{transform:scale(1.2)}
+
+#toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:16px;opacity:0;pointer-events:none;transition:.3s;z-index:70;max-width:90%;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+#confetti span{position:absolute;top:-40px;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <button class="ic" id="back" aria-label="Kembali" onclick="App.back()">⬅️</button>
+    <div id="title">KIKO Learn World</div>
+    <button class="ic" id="snd" aria-label="Suara" onclick="toggleSound()">🔊</button>
+    <div id="starpill">⭐ <span id="starcount">0</span></div>
+  </header>
+  <main id="view"></main>
+  <nav id="bottomnav">
+    <button data-n="home" onclick="App.nav('home')"><span>🏠</span>Beranda</button>
+    <button data-n="games" onclick="App.nav('games')"><span>🎮</span>Games</button>
+    <button data-n="dashboard" onclick="App.nav('dashboard')"><span>👩</span>Untuk Bunda</button>
+  </nav>
+</div>
+<div id="modal" onclick="if(event.target===this)closeModal()"></div>
+<div id="toast"></div>
+<div id="confetti"></div>
+
+<script>
+/* ===================== KONFIGURASI ===================== */
+const CONFIG = {
+  NAMA: "KIKO Learn World",
+  TAGLINE: "Belajar Seru Tanpa Dipaksa",
+  INSTRUKTUR: "Kak Nia",
+  LOGO_URL: "",     // [ISI URL GAMBAR KAMU] contoh: "https://domainmu.com/logo.png" (kosongkan = pakai maskot kelinci)
+  WA_NUMBER: ""     // [ISI NOMOR KAMU] format internasional tanpa +, contoh: "6281234567890"
+};
+
+/* ===================== DATA ===================== */
+const LETTERS = [
+ ['A','Ayam','🐔'],['B','Bola','⚽'],['C','Cicak','🦎'],['D','Domba','🐑'],['E','Elang','🦅'],['F','Foto','📷'],
+ ['G','Gajah','🐘'],['H','Harimau','🐯'],['I','Ikan','🐟'],['J','Jeruk','🍊'],['K','Kucing','🐱'],['L','Lebah','🐝'],
+ ['M','Mobil','🚗'],['N','Nanas','🍍'],['O','Ombak','🌊'],['P','Pisang','🍌'],['Q','Quran','📖'],['R','Rusa','🦌'],
+ ['S','Sapi','🐮'],['T','Topi','🎩'],['U','Ular','🐍'],['V','Vas Bunga','💐'],['W','Wortel','🥕'],['X','Xilofon','🎶'],
+ ['Y','Yoyo','🪀'],['Z','Zebra','🦓']
+].map(a=>({l:a[0],w:a[1],e:a[2]}));
+
+const NUM = ['Satu','Dua','Tiga','Empat','Lima','Enam','Tujuh','Delapan','Sembilan','Sepuluh'];
+const NUMOBJ = ['🍎','🎈','🐥','⭐','🍓','🚗','🌸','🐟','🍪','🦋'];
+
+const HIJ = [['ا','Alif'],['ب','Ba'],['ت','Ta'],['ث','Tsa'],['ج','Jim'],['ح','Ha'],['خ','Kho'],['د','Dal']]
+  .concat([['ذ','Dzal'],['ر','Ro'],['ز','Zai'],['س','Sin'],['ش','Syin'],['ص','Shod'],['ض','Dhod'],['ط','Tho'],['ظ','Zho'],['ع','\'Ain'],['غ','Ghoin'],['ف','Fa'],['ق','Qof'],['ك','Kaf'],['ل','Lam'],['م','Mim'],['ن','Nun'],['و','Wawu'],['ه','Ha'],['ي','Ya']])
+  .map(a=>({a:a[0],n:a[1]}));
+
+const DOA = [
+ {e:'🍽️',t:'Doa Sebelum Makan',c:'bg-orange',ar:'اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ',la:"Allahumma baarik lanaa fiimaa razaqtanaa wa qinaa 'adzaaban-naar.",id:'Ya Allah, berkahilah rezeki kami dan jauhkan kami dari siksa api neraka.'},
+ {e:'😋',t:'Doa Sesudah Makan',c:'bg-yellow',ar:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',la:"Alhamdulillaahilladzii ath'amanaa wa saqaanaa wa ja'alanaa muslimiin.",id:'Segala puji bagi Allah yang telah memberi kami makan dan minum, dan menjadikan kami muslim.'},
+ {e:'😴',t:'Doa Sebelum Tidur',c:'bg-purple',ar:'بِاسْمِكَ اللَّهُمَّ أَحْيَا وَبِاسْمِكَ أَمُوتُ',la:'Bismikallaahumma ahyaa wa bismika amuut.',id:'Dengan nama-Mu ya Allah, aku hidup dan aku mati.'},
+ {e:'🌞',t:'Doa Bangun Tidur',c:'bg-blue',ar:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',la:"Alhamdulillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.",id:'Segala puji bagi Allah yang menghidupkan kami setelah tidur, dan kepada-Nya kami kembali.'},
+ {e:'👨‍👩‍👧',t:'Doa untuk Orang Tua',c:'bg-pink',ar:'رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',la:'Rabbighfirlii wa liwaalidayya warhamhumaa kamaa rabbayaanii shaghiiraa.',id:'Ya Allah, ampunilah aku dan ibu bapakku, sayangilah mereka seperti mereka menyayangiku waktu kecil.'},
+ {e:'🚽',t:'Doa Masuk Kamar Mandi',c:'bg-green',ar:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',la:"Allaahumma innii a'uudzu bika minal khubutsi wal khabaaits.",id:'Ya Allah, aku berlindung kepada-Mu dari setan laki-laki dan setan perempuan.'}
+];
+
+const STORY = [
+ {e:'🚢',t:'Nabi Nuh dan Kapal Besar',c:'bg-blue',p:[
+  ['😇','Nabi Nuh adalah nabi yang sabar dan baik hati.'],
+  ['🚢','Allah menyuruh Nabi Nuh membuat kapal yang besar.'],
+  ['🌊','Banjir besar datang! Orang beriman dan hewan-hewan selamat di dalam kapal.'],
+  ['💙','Pesan: Kalau kita taat kepada Allah, kita akan selamat.']]},
+ {e:'🐋',t:'Nabi Yunus dan Ikan Besar',c:'bg-green',p:[
+  ['📢','Nabi Yunus mengajak kaumnya untuk beribadah kepada Allah.'],
+  ['🐋','Suatu hari Nabi Yunus ditelan oleh seekor ikan yang sangat besar.'],
+  ['🤲','Di dalam perut ikan, Nabi Yunus berdoa dan memohon ampun kepada Allah.'],
+  ['💙','Allah mendengar doa Nabi Yunus dan menolongnya. Allah selalu dengar doa kita.']]},
+ {e:'🐜',t:'Nabi Sulaiman dan Semut',c:'bg-yellow',p:[
+  ['🦜','Nabi Sulaiman bisa mengerti bahasa hewan, karena anugerah Allah.'],
+  ['🐜','Suatu hari seekor semut berseru, "Ayo masuk sarang!"'],
+  ['😊','Nabi Sulaiman tersenyum dan bersyukur kepada Allah.'],
+  ['💙','Pesan: Sayangi semua makhluk ciptaan Allah.']]}
+];
+
+const ANIMALS = [
+ ['🐱','Kucing','Meong!'],['🐶','Anjing','Guk guk!'],['🐮','Sapi','Mooo!'],['🐔','Ayam','Kukuruyuk!'],
+ ['🦆','Bebek','Kwek kwek!'],['🐐','Kambing','Embeek!'],['🦁','Singa','Auum!'],['🐸','Katak','Kokok!']
+].map(a=>({e:a[0],n:a[1],s:a[2]}));
+
+const BADGES = [
+ {n:5,e:'🎁',t:'Bintang Cilik'},{n:15,e:'🏅',t:'Anak Pintar'},{n:30,e:'🏆',t:'Juara Kiko'},{n:50,e:'👑',t:'Bintang Super'}
+];
+const PAL = ['bg-pink','bg-blue','bg-yellow','bg-green','bg-purple','bg-orange'];
+
+/* ===================== STATE ===================== */
+const KEY = 'kiko_learn_v1';
+let S = {stars:0,badges:[],acts:0,today:0,sound:true,opened:{huruf:[],angka:[],doa:[],hijaiyah:[],cerita:[]}};
+try{ const r = JSON.parse(localStorage.getItem(KEY)); if(r) S = Object.assign(S,r,{opened:Object.assign(S.opened,r.opened||{})}); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+function markOpen(m,id){ if(!S.opened[m].includes(id)){ S.opened[m].push(id); save(); } }
+
+/* ===================== UTIL ===================== */
+const $ = s => document.querySelector(s);
+const rnd = n => Math.floor(Math.random()*n);
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = (a,n) => shuffle(a).slice(0,n);
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>t.classList.remove('show'),2600); }
+
+let AC;
+function tone(f,d,t=0,type='sine'){
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    const o=AC.createOscillator(),g=AC.createGain(); o.type=type; o.frequency.value=f;
+    o.connect(g); g.connect(AC.destination); const s=AC.currentTime+t;
+    g.gain.setValueAtTime(.09,s); g.gain.exponentialRampToValueAtTime(.0001,s+d); o.start(s); o.stop(s+d); }catch(e){}
+}
+function sfx(k){ if(!S.sound) return;
+  if(k==='ok'){tone(660,.15);tone(880,.2,.12);}
+  else if(k==='bad'){tone(220,.25,0,'triangle');}
+  else if(k==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.22,i*.12));}
+  else if(k==='tap'){tone(520,.08);}
+}
+function say(text,lang='id-ID'){
+  if(!S.sound||!('speechSynthesis' in window)) return;
+  try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang=lang; u.rate=.8; u.pitch=1.25; speechSynthesis.speak(u);}catch(e){}
+}
+function toggleSound(){ S.sound=!S.sound; save(); $('#snd').textContent=S.sound?'🔊':'🔇'; if(!S.sound) try{speechSynthesis.cancel()}catch(e){} }
+
+function confetti(){
+  const c=$('#confetti'), em=['⭐','🎈','🌸','🎉','✨','🍭'];
+  for(let i=0;i<28;i++){ const s=document.createElement('span'); s.textContent=em[i%em.length];
+    s.style.left=Math.random()*100+'%'; s.style.animationDelay=Math.random()*.7+'s'; s.style.fontSize=(18+Math.random()*18)+'px';
+    c.appendChild(s); setTimeout(()=>s.remove(),3600); }
+}
+function updateStars(){ $('#starcount').textContent=S.stars; }
+function reward(n=1){
+  S.stars+=n; S.acts++; S.today++; updateStars();
+  BADGES.forEach(b=>{ if(S.stars>=b.n && !S.badges.includes(b.n)){ S.badges.push(b.n);
+    setTimeout(()=>{ sfx('win'); confetti(); modal(`<div class="memo bounce">${b.e}</div><div class="mword">Badge Baru!</div><div class="bubble">${b.t}</div><p class="hint">Hebat! Kamu dapat ${b.n} bintang ⭐</p><div class="mrow"><button onclick="closeModal()">Yeay! 🎉</button></div>`); },700); } });
+  save();
+}
+function modal(html){ const m=$('#modal'); m.innerHTML=`<div class="msheet"><button class="mx" onclick="closeModal()" aria-label="Tutup">✖</button>${html}</div>`; m.classList.add('show'); }
+function closeModal(){ $('#modal').classList.remove('show'); try{speechSynthesis.cancel()}catch(e){} }
+
+/* ===================== DRAG ENGINE (mouse + sentuh) ===================== */
+function enableDrag(root,onDrop){
+  root.querySelectorAll('.chip').forEach(ch=>{
+    ch.addEventListener('pointerdown',e=>{
+      e.preventDefault(); try{ch.setPointerCapture(e.pointerId);}catch(_){}
+      const sx=e.clientX, sy=e.clientY; ch.classList.add('drag'); sfx('tap');
+      const mv=ev=>{ ch.style.transform=`translate(${ev.clientX-sx}px,${ev.clientY-sy}px) scale(1.15)`; };
+      const up=ev=>{
+        ch.removeEventListener('pointermove',mv); ch.removeEventListener('pointerup',up); ch.removeEventListener('pointercancel',up);
+        ch.classList.remove('drag'); ch.style.transform=''; ch.style.visibility='hidden';
+        const el=document.elementFromPoint(ev.clientX,ev.clientY); ch.style.visibility='';
+        const t=el&&el.closest('.target'); if(t) onDrop(ch,t);
+      };
+      ch.addEventListener('pointermove',mv); ch.addEventListener('pointerup',up); ch.addEventListener('pointercancel',up);
+    });
+  });
+}
+function dragRound(el,items,sayFn,nextFn){
+  let left=items.length;
+  el.innerHTML=`<p class="hint">Seret kartu ke pasangannya ya! 👆</p>
+   <div class="targets">${items.map(it=>`<div class="target" data-k="${it.key}"><div class="tv">${it.target}</div><div class="slot">?</div></div>`).join('')}</div>
+   <div class="chips">${shuffle(items).map(it=>`<div class="chip" data-k="${it.key}">${it.chip}</div>`).join('')}</div>
+   <div class="feedback" id="fb"></div>`;
+  enableDrag(el,(ch,t)=>{
+    if(t.classList.contains('done')) return;
+    if(ch.dataset.k===t.dataset.k){
+      t.classList.add('done'); t.querySelector('.slot').textContent=ch.textContent; ch.style.display='none'; sfx('ok'); sayFn&&sayFn(ch.dataset.k);
+      if(--left===0){ reward(2); sfx('win'); confetti(); say('Hebat sekali!');
+        $('#fb').innerHTML=`🎉 Hebat! +2 ⭐<br><button class="btn y" style="margin-top:8px">Main lagi ➡️</button>`;
+        $('#fb button').onclick=nextFn; }
+    } else { t.classList.add('shake'); sfx('bad'); setTimeout(()=>t.classList.remove('shake'),450); say('Coba lagi ya'); }
+  });
+}
+
+/* ===================== KUIS PILIHAN ===================== */
+function choiceGame(el,gen){
+  const q=gen();
+  el.innerHTML=`<div class="q-card"><div class="q-prompt ${q.sm?'sm':''}">${q.prompt}</div><div class="q-title">${q.title}</div>
+   <div class="opts">${q.options.map((o,i)=>`<button class="opt c${i} ${q.small?'sm':''}" data-v="${o}">${o}</button>`).join('')}</div>
+   <div class="feedback"></div></div>`;
+  let lock=false; const fb=el.querySelector('.feedback');
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+    if(lock) return;
+    if(b.dataset.v===String(q.answer)){ lock=true; b.classList.add('ok'); sfx('ok'); say(q.say||'Hebat'); fb.innerHTML=`🌟 Pintar! +1 ⭐ ${q.extra||''}`; reward(1);
+      setTimeout(()=>choiceGame(el,gen),1700);
+    } else { b.classList.add('shake','bad'); sfx('bad'); say('Coba lagi ya'); setTimeout(()=>b.classList.remove('shake','bad'),500); }
+  });
+}
+
+/* ===================== MODAL KONTEN ===================== */
+function showLetter(i){
+  const L=LETTERS[i]; markOpen('huruf',L.l);
+  modal(`<div class="mbig">${L.l}<small>${L.l.toLowerCase()}</small></div><div class="memo bounce">${L.e}</div>
+   <div class="mword">${L.l} = ${L.w}</div><div class="bubble">🔊 “${L.l}… ${L.w}!”</div>
+   <div class="mrow"><button onclick="say('${L.l}... ${L.w}')">🔊 Ulangi</button><button onclick="showLetter(${(i+1)%26})">Lanjut ➡️</button></div>`);
+  say(`${L.l}... ${L.w}`); sfx('tap'); App.softRefresh();
+}
+function showNumber(n){
+  markOpen('angka',n);
+  const o=NUMOBJ[n-1];
+  modal(`<div class="mbig">${n}</div><div class="objs">${Array.from({length:n},(_,i)=>`<span style="animation-delay:${i*.12}s">${o}</span>`).join('')}</div>
+   <div class="mword">${NUM[n-1]}</div><div class="bubble">🔊 “${NUM.slice(0,n).join('… ')}!”</div>
+   <div class="mrow"><button onclick="say('${NUM.slice(0,n).join(', ')}')">🔊 Hitung lagi</button><button onclick="showNumber(${n%10+1})">Lanjut ➡️</button></div>`);
+  say(NUM.slice(0,n).join(', ')); sfx('tap'); App.softRefresh();
+}
+function showHij(i){
+  const h=HIJ[i]; markOpen('hijaiyah',i);
+  modal(`<div class="mbig ar">${h.a}</div><div class="mword">${h.n}</div><div class="bubble">🔊 “${h.n}…”</div>
+   <div class="mrow"><button onclick="say('${h.n}')">🔊 Ulangi</button><button onclick="showHij(${(i+1)%HIJ.length})">Lanjut ➡️</button></div>`);
+  say(h.n); sfx('tap'); App.softRefresh();
+}
+function showDoa(i){
+  const d=DOA[i]; markOpen('doa',i);
+  modal(`<div class="memo">${d.e}</div><div class="mword" style="font-size:24px">${d.t}</div>
+   <div class="arab">${d.ar}</div><div class="latin">${d.la}</div>
+   <div class="bubble" style="font-size:16px">${d.id}</div>
+   <div class="mrow"><button onclick="say('${d.t}. Artinya. ${d.id.replace(/'/g,'')}')">🔊 Dengar arti</button><button onclick="reward(1);confetti();sfx('win');toast('Pintar! +1 ⭐ sudah hafal doa');">⭐ Sudah hafal</button></div>`);
+  sfx('tap'); App.softRefresh();
+}
+function showStory(i,p=0){
+  const s=STORY[i], pg=s.p[p], last=p===s.p.length-1; if(last) markOpen('cerita',i);
+  modal(`<div class="mword" style="font-size:22px">${s.t}</div><div class="memo bounce" style="font-size:96px">${pg[0]}</div>
+   <div class="bubble" style="font-size:18px">${pg[1]}</div>
+   <div class="dots">${s.p.map((_,k)=>`<i class="${k===p?'on':''}"></i>`).join('')}</div>
+   <div class="mrow">${p>0?`<button onclick="showStory(${i},${p-1})">⬅️</button>`:''}<button onclick="say('${pg[1].replace(/['"]/g,'')}')">🔊</button>
+   ${last?`<button onclick="reward(2);confetti();sfx('win');closeModal();">Selesai ⭐</button>`:`<button onclick="showStory(${i},${p+1})">➡️</button>`}</div>`);
+  say(pg[1].replace(/['"]/g,'')); App.softRefresh();
+}
+
+/* ===================== WORKSHEET (simulasi download) ===================== */
+function wsHTML(m){
+  const T={huruf:'Huruf A–Z',angka:'Angka 1–10',islam:'Belajar Islam',games:'Mini Games'}[m];
+  let b='';
+  if(m==='huruf') b=LETTERS.map(l=>`<div class="r"><span class="g">${l.l}</span><span class="d">${l.l}</span><span class="d">${l.l}</span><span class="d">${l.l}</span><span class="w">${l.e} ${l.w}</span></div>`).join('');
+  if(m==='angka') b=NUM.map((w,i)=>`<div class="r"><span class="g">${i+1}</span><span class="d">${i+1}</span><span class="d">${i+1}</span><span class="w">${NUMOBJ[i].repeat(i+1)}<br><small>Lingkari & hitung: ${w}</small></span></div>`).join('');
+  if(m==='islam') b=`<h2>Tebalkan huruf hijaiyah</h2><div class="hg">${HIJ.map(h=>`<div class="hc"><span class="ar d">${h.a}</span><small>${h.n}</small></div>`).join('')}</div>
+    <h2>Warnai & hafalkan doa</h2>${DOA.slice(0,3).map(d=>`<div class="doa">${d.e} <b>${d.t}</b><div class="ar">${d.ar}</div></div>`).join('')}`;
+  if(m==='games') b=`<h2>Tulis nama hewan</h2><div class="hg">${ANIMALS.map(a=>`<div class="hc"><span style="font-size:48px">${a.e}</span><div class="line"></div></div>`).join('')}</div>
+    <h2>Urutkan angka: tulis 1 sampai 10</h2><div class="r">${NUM.map((_,i)=>`<span class="d">${i+1}</span>`).join('')}</div>`;
+  return `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Worksheet ${T} – ${CONFIG.NAMA}</title>
+  <style>body{font-family:Arial,sans-serif;max-width:800px;margin:20px auto;padding:0 18px;color:#333}
+  h1{color:#2e6fb0;margin:0}.top{display:flex;justify-content:space-between;border-bottom:3px dashed #8fd0fa;padding-bottom:8px;margin-bottom:12px}
+  .r{display:flex;align-items:center;gap:18px;border-bottom:1px solid #eee;padding:4px 0;flex-wrap:wrap}.g{font-size:48px;font-weight:bold;color:#e6709a;width:60px}
+  .d{font-size:48px;color:#d0d0d0;font-weight:bold;letter-spacing:6px;-webkit-text-stroke:1px #aaa}.w{font-size:20px;margin-left:auto}.ar{font-family:'Noto Naskh Arabic',serif}
+  .hg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.hc{border:2px dashed #bcd;border-radius:12px;text-align:center;padding:8px}.hc .d{font-size:56px;letter-spacing:0}
+  .line{border-bottom:2px solid #999;height:34px;margin-top:8px}.doa{border:2px solid #cde;border-radius:14px;padding:10px;margin:8px 0;font-size:20px}.doa .ar{font-size:30px;direction:rtl;margin-top:6px}
+  .foot{text-align:center;color:#888;font-size:13px;margin-top:20px}button{padding:10px 18px;font-size:16px;border-radius:12px;border:0;background:#ffe9a8;cursor:pointer}
+  @media print{.no{display:none}}</style></head><body>
+  <div class="top"><div><h1>${CONFIG.NAMA}</h1><b>Worksheet: ${T}</b></div><div>Nama: ________________<br>Tanggal: ______________</div></div>
+  <p class="no"><button onclick="window.print()">🖨️ Cetak worksheet</button></p>${b}
+  <div class="foot">${CONFIG.NAMA} • ${CONFIG.TAGLINE} • ${CONFIG.INSTRUKTUR}</div></body></html>`;
+}
+function download(m){
+  try{
+    const blob=new Blob([wsHTML(m)],{type:'text/html'}); const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=`KIKO-Worksheet-${m}.html`; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000); sfx('ok'); toast('📥 Worksheet siap! Buka lalu cetak ya, Bunda');
+  }catch(e){ toast('Maaf, download belum bisa di perangkat ini'); }
+}
+function waLink(){
+  if(!CONFIG.WA_NUMBER){ toast('Isi nomor WhatsApp di bagian CONFIG dulu ya'); return; }
+  window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent('Halo Kak Nia, saya mau tanya tentang KIKO Learn World 😊')}`,'_blank');
+}
+
+/* ===================== TAMPILAN ===================== */
+const MASCOT = `<svg class="mascot" viewBox="0 0 120 140" onclick="mascotTalk()" role="img" aria-label="Kiko si kelinci">
+ <ellipse cx="42" cy="34" rx="13" ry="30" fill="#fff" stroke="#f3b4c8" stroke-width="3"/><ellipse cx="42" cy="36" rx="6" ry="20" fill="#ffd6e0"/>
+ <ellipse cx="78" cy="34" rx="13" ry="30" fill="#fff" stroke="#f3b4c8" stroke-width="3" transform="rotate(8 78 34)"/><ellipse cx="78" cy="36" rx="6" ry="20" fill="#ffd6e0" transform="rotate(8 78 36)"/>
+ <ellipse cx="60" cy="112" rx="28" ry="24" fill="#fff" stroke="#e4eaf3" stroke-width="3"/>
+ <circle cx="60" cy="78" r="32" fill="#fff" stroke="#e4eaf3" stroke-width="3"/>
+ <circle cx="49" cy="74" r="5" fill="#3b3a5a"/><circle cx="71" cy="74" r="5" fill="#3b3a5a"/><circle cx="50.5" cy="72.5" r="1.6" fill="#fff"/><circle cx="72.5" cy="72.5" r="1.6" fill="#fff"/>
+ <ellipse cx="60" cy="83" rx="4.5" ry="3.2" fill="#f58ab0"/><path d="M60 86 q-6 7 -11 2 M60 86 q6 7 11 2" fill="none" stroke="#3b3a5a" stroke-width="2.2" stroke-linecap="round"/>
+ <circle cx="42" cy="86" r="6" fill="#ffc2d4" opacity=".8"/><circle cx="78" cy="86" r="6" fill="#ffc2d4" opacity=".8"/>
+ <path d="M48 104 l12 6 l12 -6 v12 l-12 -6 l-12 6z" fill="#8fd0fa" stroke="#5aa8e6" stroke-width="2" stroke-linejoin="round"/>
+</svg>`;
+const GREET=['Halo, aku Kiko! 🐰','Ayo belajar!','Kamu pintar! ⭐','Yuk main bareng!'];
+function mascotTalk(){ const s=document.getElementById('sp'); const t=GREET[rnd(GREET.length)]; if(s){s.textContent=t; s.style.animation='none'; void s.offsetWidth; s.style.animation='';} say(t.replace(/[^\p{L}\p{N}\s!,.]/gu,'')); sfx('tap'); }
+
+function homeHTML(){
+  const logo = CONFIG.LOGO_URL ? `<img class="logo" src="${CONFIG.LOGO_URL}" alt="Logo ${CONFIG.NAMA}" onerror="this.style.display='none'">` : '';
+  return `<div class="fade"><section class="hero"><span class="sun">☀️</span><span class="cloud c1">☁️</span><span class="cloud c2">☁️</span>
+   <div class="speech" id="sp">Halo, aku Kiko! 🐰</div>${logo}<div>${MASCOT}</div>
+   <h1>${CONFIG.NAMA}</h1><p>${CONFIG.TAGLINE}</p><span class="teacher">👩‍🏫 ${CONFIG.INSTRUKTUR}</span></section>
+   <div class="menu">
+    <button class="mcard bg-pink" onclick="App.go('huruf')"><span class="em">🔤</span>Belajar Huruf<small>A – Z</small></button>
+    <button class="mcard bg-blue" onclick="App.go('angka')"><span class="em">🔢</span>Belajar Angka<small>1 – 10</small></button>
+    <button class="mcard bg-green" onclick="App.go('islam')"><span class="em">🕌</span>Belajar Islam<small>Doa • Hijaiyah • Kisah</small></button>
+    <button class="mcard bg-yellow" onclick="App.go('games')"><span class="em">🎮</span>Mini Games<small>Seru & dapat ⭐</small></button>
+   </div>
+   <button class="wa" onclick="waLink()">💬 Tanya ${CONFIG.INSTRUKTUR} via WhatsApp</button></div>`;
+}
+
+const MODS = {
+ huruf:{title:'Belajar Huruf',tabs:[['belajar','📖 Belajar'],['seret','🧩 Seret'],['tebak','🖼️ Tebak']]},
+ angka:{title:'Belajar Angka',tabs:[['belajar','📖 Belajar'],['hitung','🍎 Hitung'],['cocok','🧩 Cocokkan']]},
+ islam:{title:'Belajar Islam',tabs:[['doa','🤲 Doa'],['hijaiyah','ا Hijaiyah'],['cerita','📚 Kisah']]}
+};
+
+const FILL = {
+ 'huruf.belajar':el=>{ el.innerHTML=`<p class="hint">Ketuk huruf untuk mendengar & melihat gambarnya 👇</p><div class="grid g5">${LETTERS.map((L,i)=>`<button class="tile ${PAL[i%6]} ${S.opened.huruf.includes(L.l)?'done':''}" onclick="showLetter(${i})">${L.l}</button>`).join('')}</div>`; },
+ 'huruf.seret':el=>{ const go=()=>dragRound(el,pick(LETTERS,3).map(L=>({key:L.l,chip:L.l,target:`<span class="big">${L.e}</span>${L.w}`})),k=>{const L=LETTERS.find(x=>x.l===k);say(`${k}... ${L.w}`)},go); go(); },
+ 'huruf.tebak':el=>{ choiceGame(el,()=>{ const L=LETTERS[rnd(26)]; const o=shuffle([L.l,...pick(LETTERS.filter(x=>x!==L),2).map(x=>x.l)]);
+   return {prompt:L.e,title:'Huruf depan gambar ini apa?',options:o,answer:L.l,say:`${L.l}... ${L.w}`,extra:`<br>${L.l} = ${L.w}`}; }); },
+ 'angka.belajar':el=>{ el.innerHTML=`<p class="hint">Ketuk angka untuk menghitung bersama 👇</p><div class="grid g5">${NUM.map((w,i)=>`<button class="tile nt ${PAL[i%6]} ${S.opened.angka.includes(i+1)?'done':''}" onclick="showNumber(${i+1})">${i+1}</button>`).join('')}</div>`; },
+ 'angka.hitung':el=>{ choiceGame(el,()=>{ const n=1+rnd(10); const o=new Set([n]); while(o.size<3){const x=1+rnd(10); o.add(x);} 
+   return {prompt:NUMOBJ[rnd(10)].repeat(n),sm:true,title:'Ada berapa banyak?',options:shuffle([...o]),answer:n,say:NUM.slice(0,n).join(', ')}; }); },
+ 'angka.cocok':el=>{ const go=()=>dragRound(el,pick([1,2,3,4,5,6,7,8,9,10],3).map(n=>({key:n,chip:n,target:`<span class="mini">${NUMOBJ[n-1].repeat(n)}</span>`})),k=>say(NUM[k-1]),go); go(); },
+ 'islam.doa':el=>{ el.innerHTML=`<p class="hint">Ketuk doa untuk melihat & mendengar 👇</p>${DOA.map((d,i)=>`<button class="doa ${d.c}" onclick="showDoa(${i})"><span class="em">${d.e}</span><span>${d.t}<small>${S.opened.doa.includes(i)?'✅ sudah dibuka':'Ketuk untuk belajar'}</small></span></button>`).join('')}`; },
+ 'islam.hijaiyah':el=>{ el.innerHTML=`<p class="hint">28 huruf hijaiyah — ketuk untuk belajar 👇</p><div class="grid g4">${HIJ.map((h,i)=>`<button class="tile ${PAL[i%6]} ${S.opened.hijaiyah.includes(i)?'done':''}" onclick="showHij(${i})"><span class="ar">${h.a}</span><small>${h.n}</small></button>`).join('')}</div>`; },
+ 'islam.cerita':el=>{ el.innerHTML=`<p class="hint">Kisah nabi singkat & seru 📚</p>${STORY.map((s,i)=>`<button class="doa ${s.c}" onclick="showStory(${i})"><span class="em">${s.e}</span><span>${s.t}<small>${S.opened.cerita.includes(i)?'✅ sudah dibaca':'4 halaman singkat'}</small></span></button>`).join('')}`; }
+};
+
+function renderModule(n){
+  const M=MODS[n]; const tab=App.cur.tab||M.tabs[0][0]; App.cur.tab=tab;
+  $('#view').innerHTML=`<div class="fade"><div class="tabs">${M.tabs.map(t=>`<button class="${t[0]===tab?'on':''}" onclick="App.tab('${t[0]}')">${t[1]}</button>`).join('')}</div>
+   <div id="body"></div><button class="ws" onclick="download('${n}')">📥 Download Worksheet</button></div>`;
+  FILL[n+'.'+tab]($('#body'));
+}
+
+/* --- Games --- */
+function renderGames(){
+  $('#view').innerHTML=`<div class="fade"><div class="menu" style="margin-top:0">
+   <button class="mcard bg-purple" onclick="App.go('g-puzzle')"><span class="em">🧩</span>Puzzle<small>Susun urut</small></button>
+   <button class="mcard bg-orange" onclick="App.go('g-hewan')"><span class="em">🐘</span>Tebak Hewan<small>Gambar & suara</small></button>
+   <button class="mcard bg-blue" onclick="App.go('g-memory')" style="grid-column:1/-1"><span class="em">🃏</span>Kartu Memori<small>Cari pasangan yang sama</small></button></div>
+   <div class="card" style="margin-top:16px"><h3>🏆 Hadiahku</h3><div class="note" style="text-align:left;margin-bottom:8px">Kumpulkan ⭐ untuk buka badge! Sekarang: <b>${S.stars} ⭐</b></div>
+   <div class="badges">${BADGES.map(b=>`<div class="badge ${S.badges.includes(b.n)?'on':''}"><b>${b.e}</b>${b.t}<br>${b.n} ⭐</div>`).join('')}</div></div>
+   <button class="ws" onclick="download('games')">📥 Download Worksheet</button></div>`;
+}
+function renderPuzzle(){
+  const v=$('#view'); const go=()=>{
+    const arr=Math.random()<.5?['1','2','3','4','5']:['A','B','C','D','E']; let cur=shuffle(arr); while(cur.join()===arr.join()) cur=shuffle(arr); let sel=-1, done=false;
+    const draw=()=>{ v.innerHTML=`<div class="fade"><p class="hint">Ketuk dua kotak untuk menukar. Susun dari kecil ke besar! 🧩</p>
+     <div class="grid pz">${cur.map((c,i)=>`<button class="tile ${PAL[i%6]} ${sel===i?'sel':''}" data-i="${i}">${c}</button>`).join('')}</div><div class="feedback" id="fb" style="text-align:center"></div>
+     <div style="text-align:center;margin-top:10px"><button class="btn b" id="shuf">🔀 Acak lagi</button></div></div>`;
+      v.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{ if(done) return; const i=+b.dataset.i; sfx('tap');
+        if(sel<0){sel=i;draw();} else { [cur[sel],cur[i]]=[cur[i],cur[sel]]; sel=-1; draw();
+          if(cur.join()===arr.join()){ done=true; reward(2); sfx('win'); confetti(); say('Hebat! Puzzle selesai'); $('#fb').innerHTML='🎉 Puzzle selesai! +2 ⭐<br><button class="btn y" id="nx" style="margin-top:8px">Main lagi ➡️</button>'; $('#nx').onclick=go; } } });
+      $('#shuf').onclick=go; };
+    draw(); };
+  go();
+}
+function renderHewan(){
+  const v=$('#view'); v.innerHTML='<div class="fade" id="hw"></div>';
+  choiceGame($('#hw'),()=>{ const a=ANIMALS[rnd(ANIMALS.length)]; const o=shuffle([a.n,...pick(ANIMALS.filter(x=>x!==a),2).map(x=>x.n)]);
+    return {prompt:a.e,title:'Ini hewan apa?',options:o,answer:a.n,small:true,say:`${a.n}. ${a.s}`,extra:`<br>${a.n} bersuara “${a.s}”`}; });
+}
+function renderMemory(){
+  const v=$('#view'); const go=()=>{
+    const em=pick(['🐱','🍎','🚗','🌸','🐟','⭐','🎈','🐥'],4); let deck=shuffle([...em,...em]); let first=-1, lock=false, found=0, moves=0;
+    v.innerHTML=`<div class="fade"><p class="hint">Cari kartu yang sama! Langkah: <b id="mv">0</b></p><div class="grid mem">${deck.map((c,i)=>`<button class="mc" data-i="${i}"><div>?</div></button>`).join('')}</div>
+     <div class="feedback" id="fb" style="text-align:center"></div><div style="text-align:center;margin-top:10px"><button class="btn b" id="rs">🔀 Acak ulang</button></div></div>`;
+    const cards=[...v.querySelectorAll('.mc')];
+    cards.forEach((c,i)=>c.onclick=()=>{
+      if(lock||c.classList.contains('open')||c.classList.contains('match')) return;
+      c.classList.add('open'); c.firstChild.textContent=deck[i]; sfx('tap');
+      if(first<0){ first=i; return; }
+      moves++; $('#mv').textContent=moves; const a=first; first=-1;
+      if(deck[a]===deck[i]){ [a,i].forEach(k=>{cards[k].classList.add('match')}); sfx('ok'); found++;
+        if(found===4){ reward(3); sfx('win'); confetti(); say('Hebat! Semua pasangan ketemu'); $('#fb').innerHTML='🎉 Semua pasangan ketemu! +3 ⭐<br><button class="btn y" id="nx" style="margin-top:8px">Main lagi ➡️</button>'; $('#nx').onclick=go; } }
+      else { lock=true; sfx('bad'); setTimeout(()=>{ [a,i].forEach(k=>{cards[k].classList.remove('open'); cards[k].firstChild.textContent='?';}); lock=false; },800); }
+    });
+    $('#rs').onclick=go; };
+  go();
+}
+
+/* --- Dashboard Bunda (data contoh + progres nyata) --- */
+function renderDash(){
+  const base={huruf:6,angka:3,doa:2,hijaiyah:5,cerita:1};
+  const rows=[['🔤 Huruf A–Z','huruf',26,'#f3a0bd'],['🔢 Angka 1–10','angka',10,'#8fd0fa'],['🤲 Doa Harian','doa',6,'#ffd36b'],['ا Hijaiyah','hijaiyah',28,'#7ad89a'],['📚 Kisah Nabi','cerita',3,'#b9a6ff']];
+  const pcts=rows.map(r=>Math.min(100,Math.round((base[r[1]]+S.opened[r[1]].length)/r[2]*100)));
+  const modOpen=rows.filter((r,i)=>pcts[i]>0).length;
+  const days=['Min','Sen','Sel','Rab','Kam','Jum','Sab']; const d=new Date(); const series=[3,5,2,6,4,7,3+S.today];
+  const labels=series.map((_,i)=>days[(d.getDay()-(6-i)+14)%7]); const mx=Math.max(...series);
+  $('#view').innerHTML=`<div class="fade"><div class="card bg-blue" style="display:flex;gap:12px;align-items:center"><span style="font-size:46px">👦👧</span><div><b style="font-size:21px">Halo, Bunda! 👋</b><div class="note" style="text-align:left">Ringkasan belajar si kecil minggu ini</div></div></div>
+   <div class="stat"><div class="bg-yellow"><b>${S.stars}</b>⭐ Total Bintang</div><div class="bg-pink"><b>${12+S.acts}</b>🎯 Total Aktivitas</div>
+    <div class="bg-green"><b>${modOpen}/5</b>📂 Modul Dibuka</div><div class="bg-purple"><b>${45+S.today*3}</b>⏱️ Menit Belajar</div></div>
+   <div class="card"><h3>📈 Progres Belajar</h3>${rows.map((r,i)=>`<div class="bar"><div class="l"><span>${r[0]}</span><span>${pcts[i]}%</span></div><div class="t"><div class="f" style="width:${pcts[i]}%;background:${r[3]}"></div></div></div>`).join('')}</div>
+   <div class="card"><h3>📅 Aktivitas 7 Hari</h3><div class="chart">${series.map((s,i)=>`<div><i style="height:${Math.max(8,s/mx*90)}px"></i>${labels[i]}</div>`).join('')}</div></div>
+   <div class="card"><h3>🏆 Badge Diraih</h3><div class="badges">${BADGES.map(b=>`<div class="badge ${S.badges.includes(b.n)?'on':''}"><b>${b.e}</b>${b.t}</div>`).join('')}</div></div>
+   <div class="card bg-yellow"><h3>💡 Tips untuk Bunda</h3><div style="font-size:16px;font-weight:600">Belajar 10–15 menit sehari sudah cukup. Temani si kecil, beri pujian, dan hentikan saat ia mulai bosan. 💛</div></div>
+   <button class="ws" onclick="App.go('huruf')">📥 Worksheet tersedia di tiap modul</button>
+   <button class="wa" onclick="waLink()">💬 Hubungi ${CONFIG.INSTRUKTUR}</button>
+   <p class="note" style="margin-top:14px">Sebagian angka adalah data contoh (dummy). Progres nyata tersimpan di perangkat ini.</p>
+   <div style="text-align:center"><button class="btn p" onclick="if(confirm('Hapus semua progres di perangkat ini?')){localStorage.removeItem(KEY);location.reload()}">🔄 Reset progres</button></div></div>`;
+}
+
+/* ===================== ROUTER ===================== */
+const TITLES={home:CONFIG.NAMA,huruf:'Belajar Huruf',angka:'Belajar Angka',islam:'Belajar Islam',games:'Mini Games','g-puzzle':'Puzzle','g-hewan':'Tebak Hewan','g-memory':'Kartu Memori',dashboard:'Untuk Bunda'};
+const App={
+  stack:[], cur:{n:'home',tab:null},
+  go(n,tab=null){ this.stack.push(this.cur); this.cur={n,tab}; this.render(); window.scrollTo(0,0); sfx('tap'); },
+  back(){ closeModal(); this.cur=this.stack.pop()||{n:'home',tab:null}; this.render(); },
+  nav(n){ closeModal(); this.stack=[]; this.cur={n,tab:null}; this.render(); window.scrollTo(0,0); },
+  tab(t){ this.cur.tab=t; this.render(); sfx('tap'); },
+  softRefresh(){ /* perbarui tanda ✅ di belakang modal */ const n=this.cur.n; if(MODS[n]){ const b=$('#body'); const f=FILL[n+'.'+this.cur.tab]; if(b&&f&&/belajar|doa|hijaiyah|cerita/.test(this.cur.tab)) f(b); } },
+  render(){
+    const n=this.cur.n; $('#back').style.visibility=n==='home'?'hidden':'visible'; $('#title').textContent=TITLES[n]||CONFIG.NAMA;
+    document.querySelectorAll('#bottomnav button').forEach(b=>b.classList.toggle('on',b.dataset.n===(n.startsWith('g-')?'games':n)||(b.dataset.n==='home'&&MODS[n])));
+    if(n==='home') $('#view').innerHTML=homeHTML();
+    else if(MODS[n]) renderModule(n);
+    else if(n==='games') renderGames();
+    else if(n==='g-puzzle') renderPuzzle();
+    else if(n==='g-hewan') renderHewan();
+    else if(n==='g-memory') renderMemory();
+    else if(n==='dashboard') renderDash();
+  }
+};
+$('#snd').textContent=S.sound?'🔊':'🔇';
+updateStars(); App.render();
+</script>
+</body>
+</html>
